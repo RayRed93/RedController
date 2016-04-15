@@ -13,12 +13,6 @@
 #define BT_RED 5
 #define BT_YELLOW 7
 
-<<<<<<< HEAD
-=======
-#define BT_LU_TRIGGER null
-#define BT_LD_TRIGGER null
->>>>>>> 900097f918eb13b99f98cb91186ab48420394c2e
-
 #define BT_RIGHT 11
 #define BT_LEFT 9
 #define BT_UP 10
@@ -32,11 +26,7 @@
 #define RA_X A2
 #define RA_Y A3
 
-<<<<<<< HEAD
 
-=======
-#define EMPTY -1
->>>>>>> 900097f918eb13b99f98cb91186ab48420394c2e
 
 #define LED 13
 
@@ -44,13 +34,9 @@
 
 byte Buttons[] = { BT_GREEN, BT_BLUE, BT_RED, BT_YELLOW, BT_RIGHT, BT_LEFT };
 
-<<<<<<< HEAD
-float gyroScale[] = { 0.001, 0.001, 0.001 };
-int gyroOffest[] = { 0, 5, -14 };
-=======
+
 float gyroScale[] = { 0.0001, 0.0001, 0.0001 };
 int gyroOffest[] = { 88, 108, 12 };
->>>>>>> 900097f918eb13b99f98cb91186ab48420394c2e
 float angularRotation[] = { 0, 0, 0 };
 
 bool sw = true;
@@ -76,30 +62,15 @@ void setup()
 	pinMode(RA_Y, INPUT_PULLUP);
 	
 	pinMode(LED, OUTPUT);
-<<<<<<< HEAD
 	digitalWrite(LED, HIGH);
-=======
-	//digitalWrite(LED, HIGH);
->>>>>>> 900097f918eb13b99f98cb91186ab48420394c2e
+
 	
 	Joystick.begin(false);
 	Serial.begin(9600);
 	Wire.begin();
 	//Mouse.begin();
 
-<<<<<<< HEAD
-	if (!gyro.init());
-	{
-		Serial.println("Gyro ERROR!!!");
-		//while (1);
-	}
 
-	gyro.enableDefault();
-	gyro.writeReg(L3G::CTRL_REG4, 0x20); // 2000/s
-
-
-	Joystick.setRudder(200);
-=======
 	if (!gyro.init(L3G::device_auto, L3G::sa0_auto));
 	{
 		Serial.println("Gyro ERROR!!!");
@@ -108,11 +79,10 @@ void setup()
 
 	gyro.enableDefault();
 	gyro.writeReg(L3G::CTRL_REG4, 0x20); //full scale 2000/s
-	//gyro.writeReg(L3G::)
+	
 
 
 	Joystick.setRudder(128);
->>>>>>> 900097f918eb13b99f98cb91186ab48420394c2e
 	Joystick.setThrottle(128);
 	Joystick.setXAxisRotation(180);
 	Joystick.setYAxisRotation(180);
@@ -158,12 +128,7 @@ void loop()
 
 	if (!digitalRead(BT_START) && !digitalRead(BT_SELECT))
 	{		
-<<<<<<< HEAD
-		
-=======
-		for (size_t i = 0; i < 3; i++)
 
->>>>>>> 900097f918eb13b99f98cb91186ab48420394c2e
 		sw = !sw;
 		digitalWrite(LED, sw);
 		for (size_t i = 0; i < 3; i++) angularRotation[i] = 0;
@@ -187,11 +152,8 @@ void loop()
 	Joystick.sendState();
 	PrintGyro_details();
 	
-<<<<<<< HEAD
-	delay(20);
-=======
 	delay(4);
->>>>>>> 900097f918eb13b99f98cb91186ab48420394c2e
+
 }
 
 void MouseMove()
@@ -213,18 +175,17 @@ void PrintGyro_simple()
 	Serial.print((int)gyro.g.y);
 	Serial.print(",");
 	Serial.print((int)gyro.g.z);
-<<<<<<< HEAD
-	Serial.println(",");
-=======
-	Serial.print(",");
->>>>>>> 900097f918eb13b99f98cb91186ab48420394c2e
+
+	
+
+
 
 
 }
 void PrintGyro_details()
 {
 	gyro.read();
-<<<<<<< HEAD
+
 
 	Serial.print((int)gyro.g.x);
 	Serial.print("\t");
@@ -238,26 +199,25 @@ void PrintGyro_details()
 	Serial.print(((int)gyro.g.y + gyroOffest[1])*gyroScale[1]);
 	Serial.print(",");
 	Serial.print(((int)gyro.g.z + gyroOffest[2])*gyroScale[2]);
-=======
+
 	/*Serial.print((int)gyro.g.x * gyroScale[0] + gyroOffest[0]);
 	Serial.print(",");
 	Serial.print((int)gyro.g.y * gyroScale[1] + gyroOffest[1]);
 	Serial.print(",");
 	Serial.println((int)gyro.g.z * gyroScale[2] + gyroOffest[2*/;
->>>>>>> 900097f918eb13b99f98cb91186ab48420394c2e
+
 		
 	varX += (int)gyro.g.x;
 	varY += (int)gyro.g.y;
 	varZ += (int)gyro.g.z;
-	
-<<<<<<< HEAD
-=======
+
+
 	Serial.print((int)gyro.g.x);
 	Serial.print("\t");
 	Serial.print((int)gyro.g.y);
 	Serial.print("\t");
 	Serial.print((int)gyro.g.z);
->>>>>>> 900097f918eb13b99f98cb91186ab48420394c2e
+
 	Serial.print("\t");
 	
 	Serial.print((float)varX/(float)index);
@@ -266,12 +226,12 @@ void PrintGyro_details()
 	Serial.print("\t");
 	Serial.print((float)varZ/(float)index);
 	
-<<<<<<< HEAD
+
 
 	angularRotation[0] += (gyro.g.x - gyroOffest[0])*gyroScale[0];
 	angularRotation[1] += (gyro.g.y - gyroOffest[1])*gyroScale[1];
 	angularRotation[2] += (gyro.g.z - gyroOffest[2])*gyroScale[2];
-=======
+
 	Serial.print("\t");
 	Serial.print((X-gyroOffest[0])*gyroScale[0]);
 	Serial.print("\t");
@@ -283,7 +243,6 @@ void PrintGyro_details()
 	angularRotation[0] += (X - gyroOffest[0])*gyroScale[0];
 	angularRotation[1] += (Y - gyroOffest[1])*gyroScale[1];
 	angularRotation[2] += (Z - gyroOffest[2])*gyroScale[2];
->>>>>>> 900097f918eb13b99f98cb91186ab48420394c2e
 
 	Serial.print("\t");
 	Serial.print(angularRotation[0]);
